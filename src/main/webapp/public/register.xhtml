@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+	
+    <h:head>
+        <title></title>
+    </h:head>
+    <h:body>
+    	<h:form>
+    	   Felhasználó: <h:inputText value="#{registerController.username}"></h:inputText><br/>
+    	   Jelszó: <h:inputText value="#{registerController.password}"></h:inputText><br/>
+    	   E-mail cím: <h:inputText value="#{registerController.email}"></h:inputText><br/>
+    	   <h:commandLink action="#{registerController.register()}" value="Regisztráció" />
+    	</h:form>
+    </h:body>
+</html>
