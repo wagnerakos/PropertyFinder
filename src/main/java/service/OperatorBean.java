@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import dal.UserFacade;
+import entities.Role;
 import entities.User;
 
 /**
@@ -13,7 +14,7 @@ import entities.User;
  */
 @Stateless
 public class OperatorBean {
-	
+
 	@EJB
 	private UserFacade userFacade;
 
@@ -21,16 +22,29 @@ public class OperatorBean {
 		userFacade.create(user);
 	}
 
-	public void login(String username, String password) {
+	public User login(String username, String password) {
 		List<User> users = userFacade.findAll();
-		boolean correct = false;
+		User correct = null;
 		for (User user : users) {
 			if (user.getUsername().equals(username))
 				if (user.getPasswordHash().equals(password))
-					correct = true;
+					correct = user;
 		}
-		
-		if (!correct)
+
+		if (correct == null)
 			throw new RuntimeException("Bad user or password");
+
+		return correct;
+	}
+
+	public List<User> listUsers() {
+		return userFacade.findAll();
+	}
+
+	public void deleteUser(long id) {
+		User user = userFacade.find(id);
+		if (user != null) {
+			userFacade.remove(user);
+		}
 	}
 }
