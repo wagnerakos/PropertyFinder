@@ -4,11 +4,17 @@
       xmlns:h="http://java.sun.com/jsf/html">
 	
     <h:head>
-        <title></title>
+        <title>Profilom</title>
+	<h:outputStylesheet library="css" name="style.css" />
     </h:head>
     <h:body>
-    	<h:form>
-    	   <h:outputText value="TESZT"></h:outputText>
+    	<h:form styleClass="form-style-1">
+    	   Felhasználónév: <h:inputText value="#{userController.user.username}"></h:inputText><br/>
+    	   Jelszó: <h:inputText value="#{userController.password}"></h:inputText><br/>
+    	   E-mail cím: <h:inputText value="TODO"></h:inputText><br/>
+    	   <h:commandLink action="#{userController.save()}" value="Mentés" /><br/>
+    	   <h:commandLink action="#{userController.delete(userController.user.id)}" value="Törlés" /><br/>
+    	   <h:commandLink action="#{userController.logout()}" value="Kilépés" /><br/>
     	</h:form>
     </h:body>
 </html>

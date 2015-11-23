@@ -6,7 +6,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import dal.UserFacade;
-import entities.Role;
 import entities.User;
 
 /**
@@ -23,18 +22,23 @@ public class OperatorBean {
 	}
 
 	public User login(String username, String password) {
+
+		User loggedInUser = getUser(username);
+
+		if (loggedInUser == null || !loggedInUser.getPasswordHash().equals(password))
+			throw new RuntimeException("Bad username or password");
+
+		return loggedInUser;
+	}
+
+	public User getUser(String userName) {
 		List<User> users = userFacade.findAll();
-		User correct = null;
-		for (User user : users) {
-			if (user.getUsername().equals(username))
-				if (user.getPasswordHash().equals(password))
-					correct = user;
+		User user = null;
+		for (User u : users) {
+			if (u.getUsername().equals(userName))
+				user = u;
 		}
-
-		if (correct == null)
-			throw new RuntimeException("Bad user or password");
-
-		return correct;
+		return user;
 	}
 
 	public List<User> listUsers() {
@@ -45,6 +49,14 @@ public class OperatorBean {
 		User user = userFacade.find(id);
 		if (user != null) {
 			userFacade.remove(user);
+		}
+	}
+
+	public void updateUser(User user, String newPassword) {
+		User find = userFacade.find(user.getId());
+		find.setUsername(user.getUsername());
+		if (!newPassword.equals("")) {
+			find.setPasswordHash(newPassword);
 		}
 	}
 }

@@ -4,10 +4,11 @@
       xmlns:h="http://java.sun.com/jsf/html">
 	
     <h:head>
-        <title></title>
+        <title>Regisztráció</title>
+	<h:outputStylesheet library="css" name="style.css" />
     </h:head>
     <h:body>
-    	<h:form>
+    	<h:form styleClass="form-style-1">
     	   Felhasználó: <h:inputText value="#{registerController.username}"></h:inputText><br/>
     	   Jelszó: <h:inputText value="#{registerController.password}"></h:inputText><br/>
     	   E-mail cím: <h:inputText value="#{registerController.email}"></h:inputText><br/>

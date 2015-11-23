@@ -4,11 +4,14 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<title></title>
+	<title>Felhasználók</title>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
 	<h:form>
-		<h:dataTable value="#{usersController.usersList}" var="users">
+		<h:dataTable value="#{usersController.usersList}" var="users"
+			styleClass="table" headerClass="table-th"
+			rowClasses="table-tr">
 			<h:column>
 				<f:facet name="header">Felhasználónév</f:facet>    				
             #{users.username}
@@ -17,12 +20,17 @@
 				<f:facet name="header">E-mail</f:facet>
 			</h:column>
 			<h:column>
+				<f:facet name="header">ID</f:facet>
+				#{users.id}
+			</h:column>
+			<h:column>
 				<f:facet name="header">Típus</f:facet>
             #{users.role}
          </h:column>
 			<h:column>
 				<f:facet name="header">Kezelés</f:facet>
-				<h:commandLink action="#{usersController.delete(users.id)}" value="Törlés" />
+				<h:commandLink action="#{usersController.delete(users.id)}"
+					value="Törlés" />
 			</h:column>
 		</h:dataTable>
 	</h:form>
