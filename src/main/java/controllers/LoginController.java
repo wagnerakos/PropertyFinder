@@ -26,7 +26,7 @@ public class LoginController {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return "/user/profile.xhtml?faces-redirect=true";
+		return "/public/properties.xhtml?faces-redirect=true";
 	}
 	
 	public void logout() {

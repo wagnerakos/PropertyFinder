@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <meta charset="utf-8" />
+    <title>Ingatlan kereső</title>
+    
+    <link href="#{facesContext.externalContext.requestContextPath}/public/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="#{facesContext.externalContext.requestContextPath}/public/resources/bootstrap/css/sb-admin.css" rel="stylesheet" />
+	<link href="#{facesContext.externalContext.requestContextPath}/public/resources/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+</h:head>
+
+<h:body>
+
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html" style="font-size: x-large">Ingatlan kereső</a>
+            </div>
+           
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li id="tab1">
+                        <a href="#{facesContext.externalContext.requestContextPath}/public/properties.xhtml"><i class="fa fa-fw fa-home"></i> Ingatlanok</a>
+                    </li>
+                    
+                    <h:panelGroup rendered="#{not empty request.remoteUser}">
+	                    <li id="tab2">
+	                        <a href="#{facesContext.externalContext.requestContextPath}/user/upload.xhtml"><i class="fa fa-fw fa-upload"></i> Ingatlan feltöltése</a>
+	                    </li>
+                    </h:panelGroup>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+				<div class="row">
+                    <div class="col-lg-12">                       
+                        <ui:insert name="content"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- jQuery -->
+    <script src="#{facesContext.externalContext.requestContextPath}/public/resources/bootstrap/js/jquery.js"></script>
+    <script src="#{facesContext.externalContext.requestContextPath}/public/resources/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+    	$(function() {
+        	var tabNumber = $("#tabNumber").val();
+        	$("#tab" + tabNumber).addClass("active");
+        });
+	</script>  
+    
+</h:body>
+</html>
