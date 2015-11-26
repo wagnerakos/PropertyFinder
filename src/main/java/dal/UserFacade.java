@@ -3,6 +3,7 @@ package dal;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import entities.User;
 
@@ -26,4 +27,13 @@ public class UserFacade extends AbstractFacade<User> {
 	protected EntityManager em() {
 		return em;
 	}
+    
+    public User getUserByUsername(String username) {
+    	String queryString = "SELECT u FROM User u WHERE u.username = :username";
+    	
+    	TypedQuery<User> query = em().createQuery(queryString, User.class);
+    	query.setParameter("username", username);
+    	
+    	return query.getSingleResult();
+    }
 }

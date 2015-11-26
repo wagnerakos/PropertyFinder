@@ -15,39 +15,55 @@
 
 <h:body>
 
-    <div id="wrapper">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.html" style="font-size: x-large">Ingatlan kereső</a>
-            </div>
-           
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li id="tab1">
-                        <a href="#{facesContext.externalContext.requestContextPath}/public/properties.xhtml"><i class="fa fa-fw fa-home"></i> Ingatlanok</a>
-                    </li>
-                    
-                    <h:panelGroup rendered="#{not empty request.remoteUser}">
-	                    <li id="tab2">
-	                        <a href="#{facesContext.externalContext.requestContextPath}/user/upload.xhtml"><i class="fa fa-fw fa-upload"></i> Ingatlan feltöltése</a>
+	<h:form id="form" enctype="multipart/form-data">
+	    <div id="wrapper">
+	        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	            <div class="navbar-header">
+	                <a class="navbar-brand" href="index.html" style="font-size: x-large">Ingatlan kereső</a>
+	            </div>
+	            <ul class="nav navbar-right top-nav">
+	            	<h:panelGroup rendered="#{empty request.remoteUser}">
+		                <li class="dropdown">
+		                    <a href="#{facesContext.externalContext.requestContextPath}/public/login.xhtml" class="dropdown-toggle">Bejelentkezés</a>
+		                </li>
+		                <li class="dropdown">
+		                    <a href="#{facesContext.externalContext.requestContextPath}/public/register.xhtml" class="dropdown-toggle">Regisztráció</a>
+		                </li>
+	                </h:panelGroup>
+	                <h:panelGroup rendered="#{not empty request.remoteUser}">
+		                <li class="dropdown">
+		                    <h:commandLink action="#{loginController.logout()}" value="Kijelentkezés" class="dropdown-toggle"/>
+		                </li>
+	                </h:panelGroup>
+	            </ul>
+	            <div class="collapse navbar-collapse navbar-ex1-collapse">
+	                <ul class="nav navbar-nav side-nav">
+	                    <li id="tab1">
+	                        <a href="#{facesContext.externalContext.requestContextPath}/public/properties.xhtml"><i class="fa fa-fw fa-home"></i> Ingatlanok</a>
 	                    </li>
-                    </h:panelGroup>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
-
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-				<div class="row">
-                    <div class="col-lg-12">                       
-                        <ui:insert name="content"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	                    
+	                    <h:panelGroup rendered="#{not empty request.remoteUser}">
+		                    <li id="tab2">
+		                        <a href="#{facesContext.externalContext.requestContextPath}/user/upload.xhtml"><i class="fa fa-fw fa-upload"></i> Ingatlan feltöltése</a>
+		                    </li>
+	                    </h:panelGroup>
+	                </ul>
+	            </div>
+	            <!-- /.navbar-collapse -->
+	        </nav>
+	
+	        <div id="page-wrapper" style="margin-bottom: 20px">
+	
+	            <div class="container-fluid">
+					<div class="row">
+	                    <div class="col-lg-12" style="margin-bottom: 20px">                       
+	                        <ui:insert name="content"/>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>    
+    </h:form>
     
     
     <!-- jQuery -->
@@ -56,7 +72,7 @@
     
     <script type="text/javascript">
     	$(function() {
-        	var tabNumber = $("#tabNumber").val();
+        	var tabNumber = $("input[id*='tabNumber']").val();
         	$("#tab" + tabNumber).addClass("active");
         });
 	</script>  

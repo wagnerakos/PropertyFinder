@@ -46,7 +46,8 @@ public class LoginController {
 		}
 	}
 
-	public void logout() {
+	public String logout() {
 		Faces.invalidateSession();
+		return "/public/properties.xhtml?faces-redirect=true";
 	}
 }
