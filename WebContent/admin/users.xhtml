@@ -17,30 +17,30 @@
 			styleClass="table" headerClass="table-th" rowClasses="table-tr">
 			<h:column>
 				<f:facet name="header">
-					<h:commandLink action="#{usersController.sortBy('username')}">
-							Felhasználónév
-						</h:commandLink>
 					<h:inputText class="form-control"
 						value="#{usersController.username}" a:placeholder="Felhasználónév"></h:inputText>
+					<br /><h:commandLink action="#{usersController.sortBy('username')}">
+							Felhasználónév
+						</h:commandLink>
 				</f:facet>    				
             #{users.username}
          </h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:commandLink action="#{usersController.sortBy('email')}">
-						E-mail
-					</h:commandLink>
 					<h:inputText class="form-control"
 						value="#{usersController.email}" a:placeholder="E-mail"></h:inputText>
+					<br /><h:commandLink action="#{usersController.sortBy('email')}">
+						E-mail
+					</h:commandLink>
 				</f:facet>
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:commandLink action="#{usersController.sortBy('id')}">
-					ID
-					</h:commandLink>
 					<h:inputText class="form-control"
 						value="#{usersController.id}" a:placeholder="0"></h:inputText>
+					<br /><h:commandLink action="#{usersController.sortBy('id')}">
+					ID
+					</h:commandLink>
 				</f:facet>
 				#{users.id}
 			</h:column>
