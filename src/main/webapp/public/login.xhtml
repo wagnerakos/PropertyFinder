@@ -4,13 +4,15 @@
       xmlns:h="http://java.sun.com/jsf/html">
 	
     <h:head>
-        <title></title>
+        <title>Bejelentkezés</title>
+	<h:outputStylesheet library="css" name="style.css" />
     </h:head>
     <h:body>
-    	<h:form>
-    	   <h:inputText value="#{loginController.username}"></h:inputText>
-    	   <h:inputText value="#{loginController.password}"></h:inputText>
-    	   <h:commandLink action="#{loginController.login()}" value="Bejelentkezés" />
+    	<h:form styleClass="form-style-1">
+    	   Felhasználónév: <h:inputText value="#{loginController.username}"></h:inputText><br/>
+    	   Jelszó: <h:inputText value="#{loginController.password}"></h:inputText><br/>
+    	   <h:commandLink action="#{loginController.login()}" value="Bejelentkezés" /><br/>
+    	   <h:link value="Regisztráció" outcome="register" />
     	</h:form>
     </h:body>
 </html>
