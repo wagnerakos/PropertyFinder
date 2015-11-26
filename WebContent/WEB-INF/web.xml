@@ -11,6 +11,11 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   
+  
+	<welcome-file-list>
+		<welcome-file>public/properties.xhtml</welcome-file>
+	</welcome-file-list>
+  
   <security-constraint>
       <web-resource-collection>
           <web-resource-name>User Pages</web-resource-name>

@@ -8,31 +8,54 @@
 <ui:composition template="/public/template.xhtml">
 	<ui:define name="content">
 		<h1 class="page-header">Felhasználók</h1>
-		<h:form>
-			<h:dataTable value="#{usersController.usersList}" var="users"
-				styleClass="table" headerClass="table-th" rowClasses="table-tr">
-				<h:column>
-					<f:facet name="header">Felhasználónév</f:facet>    				
+		<h:commandButton value="Szűrés"
+						class="btn btn-lg btn-primary" id="filterBtn" action="#{usersController.filter()}"/>
+		<spacer type="horizontal" size="50"/><h:commandButton value="Visszaállítás"
+						class="btn btn-lg btn-primary" id="resetfilterBtn" action="#{usersController.resetFilters()}"/>
+					<br />
+		<h:dataTable value="#{usersController.usersList}" var="users"
+			styleClass="table" headerClass="table-th" rowClasses="table-tr">
+			<h:column>
+				<f:facet name="header">
+					<h:commandLink action="#{usersController.sortBy('username')}">
+							Felhasználónév
+						</h:commandLink>
+					<h:inputText class="form-control"
+						value="#{usersController.username}" a:placeholder="Felhasználónév"></h:inputText>
+				</f:facet>    				
             #{users.username}
          </h:column>
-				<h:column>
-					<f:facet name="header">E-mail</f:facet>
-				</h:column>
-				<h:column>
-					<f:facet name="header">ID</f:facet>
+			<h:column>
+				<f:facet name="header">
+					<h:commandLink action="#{usersController.sortBy('email')}">
+						E-mail
+					</h:commandLink>
+					<h:inputText class="form-control"
+						value="#{usersController.email}" a:placeholder="E-mail"></h:inputText>
+				</f:facet>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:commandLink action="#{usersController.sortBy('id')}">
+					ID
+					</h:commandLink>
+					<h:inputText class="form-control"
+						value="#{usersController.id}" a:placeholder="0"></h:inputText>
+				</f:facet>
 				#{users.id}
 			</h:column>
-				<h:column>
-					<f:facet name="header">Típus</f:facet>
+			<h:column>
+				<f:facet name="header">
+						Típus
+				</f:facet>
             #{users.role}
          </h:column>
-				<h:column>
-					<f:facet name="header">Kezelés</f:facet>
-					<h:commandLink action="#{usersController.delete(users.id)}"
-						value="Törlés" />
-				</h:column>
-			</h:dataTable>
-		</h:form>
+			<h:column>
+				<f:facet name="header">Kezelés</f:facet>
+				<h:commandLink action="#{usersController.delete(users.id)}"
+					value="Törlés" rendered="#{users.role != 'ADMIN'}"/>
+			</h:column>
+		</h:dataTable>
 	</ui:define>
 </ui:composition>
 </html>

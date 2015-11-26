@@ -47,7 +47,7 @@ public class UserController {
 	
 	public String logout() {
 		Faces.invalidateSession();
-		return FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath() + "/public/login.xhtml?faces-redirect=true";
+		return "/public/properties.xhtml?faces-redirect=true";
 	}
 	
 	public String profile() {
