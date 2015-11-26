@@ -28,22 +28,17 @@ public class LoginController {
 	private OperatorBean ob;
 
 	public String login() {
-		User user = ob.login(username, password);
-
 		try {
 			Faces.login(username, password);
 		} catch (ServletException e) {
 			e.printStackTrace();
 		}
 
-		switch (user.getRole()) {
-		case ADMIN:
-			return "/admin/users.xhtml?faces-redirect=true";
-		case USER:
-			return "/user/profile.xhtml?faces-redirect=true";
-		default:
-			return "/user/profile.xhtml?faces-redirect=true";
-		}
+		return "/public/properties.xhtml?faces-redirect=true";
+	}
+	
+	public String register() {
+		return "/public/register.xhtml?faces-redirect=true";
 	}
 
 	public String logout() {

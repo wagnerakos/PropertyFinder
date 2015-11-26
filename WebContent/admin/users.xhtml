@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-<h:head>
-	<title>Felhasználók</title>
-	<h:outputStylesheet library="css" name="style.css" />
-</h:head>
-<h:body>
-	<h:form>
-		<h:dataTable value="#{usersController.usersList}" var="users"
-			styleClass="table" headerClass="table-th"
-			rowClasses="table-tr">
-			<h:column>
-				<f:facet name="header">Felhasználónév</f:facet>    				
+<ui:composition template="/public/template.xhtml">
+	<ui:define name="content">
+		<h1 class="page-header">Felhasználók</h1>
+		<h:form>
+			<h:dataTable value="#{usersController.usersList}" var="users"
+				styleClass="table" headerClass="table-th" rowClasses="table-tr">
+				<h:column>
+					<f:facet name="header">Felhasználónév</f:facet>    				
             #{users.username}
          </h:column>
-			<h:column>
-				<f:facet name="header">E-mail</f:facet>
-			</h:column>
-			<h:column>
-				<f:facet name="header">ID</f:facet>
+				<h:column>
+					<f:facet name="header">E-mail</f:facet>
+				</h:column>
+				<h:column>
+					<f:facet name="header">ID</f:facet>
 				#{users.id}
 			</h:column>
-			<h:column>
-				<f:facet name="header">Típus</f:facet>
+				<h:column>
+					<f:facet name="header">Típus</f:facet>
             #{users.role}
          </h:column>
-			<h:column>
-				<f:facet name="header">Kezelés</f:facet>
-				<h:commandLink action="#{usersController.delete(users.id)}"
-					value="Törlés" />
-			</h:column>
-		</h:dataTable>
-	</h:form>
-</h:body>
+				<h:column>
+					<f:facet name="header">Kezelés</f:facet>
+					<h:commandLink action="#{usersController.delete(users.id)}"
+						value="Törlés" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>
