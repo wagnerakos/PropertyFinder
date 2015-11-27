@@ -20,7 +20,7 @@
 			</div>
 			<div class="form-group">
 				<label>E-mail cím</label>
-				<h:inputText value="TODO" class="form-control"></h:inputText>
+				<h:inputText value="#{userController.user.email}" class="form-control"></h:inputText>
 			</div>
 			<h:commandButton value="Mentés" class="btn btn-lg btn-primary"
 				id="saveBtn" action="#{userController.save()}" />

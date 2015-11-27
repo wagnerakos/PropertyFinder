@@ -55,6 +55,7 @@ public class OperatorBean {
 	public void updateUser(User user, String newPassword) {
 		User find = userFacade.find(user.getId());
 		find.setUsername(user.getUsername());
+		find.setEmail(user.getEmail());
 		if (!newPassword.equals("")) {
 			find.setPasswordHash(newPassword);
 		}

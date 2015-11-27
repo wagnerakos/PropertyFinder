@@ -34,6 +34,7 @@ public class RegisterController {
 		User user = new User();
 		user.setUsername(username);
 		user.setPasswordHash(password);
+		user.setEmail(email);
 		user.setRole(Role.USER);
 		ob.registerUser(user);
 		return "/public/login.xhtml?faces-redirect=true";

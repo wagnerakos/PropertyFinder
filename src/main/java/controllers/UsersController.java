@@ -71,7 +71,8 @@ public class UsersController {
 		if (!email.equals("")) {
 			users = 
 					users.stream()
-					.filter(p -> p.getUsername().contains(username))
+					.filter(p -> p.getEmail() != null)
+					.filter(p -> p.getEmail().contains(email))
 					.collect(Collectors.toList());
 		}
 		if (!id.equals("")) {
@@ -93,7 +94,7 @@ public class UsersController {
 					case "username":
 						return o1.getUsername().compareTo(o2.getUsername());
 					case "email":
-						return o1.getUsername().compareTo(o2.getUsername());
+						return o1.getEmail().compareTo(o2.getEmail());
 					case "id":
 						return o1.getId().compareTo(o2.getId());
 					default:
@@ -112,7 +113,7 @@ public class UsersController {
 					case "username":
 						return o2.getUsername().compareTo(o1.getUsername());
 					case "email":
-						return o2.getUsername().compareTo(o1.getUsername());
+						return o2.getEmail().compareTo(o1.getEmail());
 					case "id":
 						return o2.getId().compareTo(o1.getId());
 					default:
