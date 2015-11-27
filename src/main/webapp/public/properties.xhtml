@@ -20,6 +20,22 @@
         		<composites:propertyComposite property="#{property}"/>
         	</div>
         </c:forEach>
+        
+        <div class="row">
+        	<div class="col-lg-4 text-left">
+	        	<h:commandButton value="&lt; Előző" rendered="#{propertiesController.first gt 0}" class="btn btn-lg btn-default">
+	        		<f:ajax listener="#{propertiesController.prevPage()}" render=":form"/>
+	        	</h:commandButton>
+	       	</div>
+	       	<div class="col-lg-4 text-center">
+	        	<h:outputText value="#{propertiesController.first + 1}-#{propertiesController.upperBoundary}/#{propertiesController.totalCount}" />
+	       	</div>
+	       	<div class="col-lg-4 text-right">
+	        	<h:commandButton value="Következő &gt;" rendered="#{propertiesController.first + propertiesController.pageSize lt propertiesController.totalCount}" class="btn btn-lg btn-default">
+	        		<f:ajax listener="#{propertiesController.nextPage()}" render=":form"/>
+	        	</h:commandButton>
+	       	</div>
+        </div>
 	</ui:define>
 </ui:composition>
 </html>

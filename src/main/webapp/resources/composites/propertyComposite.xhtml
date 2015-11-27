@@ -10,7 +10,7 @@
 <composite:implementation>
 	<div class="row">
 		<div class="col-lg-2">
-			<h:graphicImage value="http://localhost:8080/PropertyFinder/images?id=#{cc.attrs.property.id}" style="max-height: 100px"/>
+			<h:graphicImage value="http://localhost:8080/PropertyFinder/images?propertyid=#{cc.attrs.property.id}" style="max-height: 100px"/>
 		</div>
 		<div class="col-lg-4">
 			<h:outputLabel value="#{propertiesController.getAddressAsString(cc.attrs.property.address)}" />
