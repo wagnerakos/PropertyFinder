@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<composite:interface>
+	<composite:attribute name="property" />
+</composite:interface>
+<composite:implementation>
+	<div class="row">
+		<div class="col-lg-2">
+			<h:graphicImage value="http://localhost:8080/PropertyFinder/images?id=#{cc.attrs.property.id}" style="max-height: 100px"/>
+		</div>
+		<div class="col-lg-4">
+			<h:outputLabel value="#{propertiesController.getAddressAsString(cc.attrs.property.address)}" />
+			<br/>
+			<h:outputText value="#{cc.attrs.property.squareFootage} mm2" />
+			<br/>
+			<h:outputText value="#{cc.attrs.property.type.label}" />
+		</div>
+		<div class="col-lg-4 text-right">
+			<h:outputLabel value="#{cc.attrs.property.price} Ft" />
+		</div>
+		<div class="col-lg-2 text-right">
+			<h:outputLink value="#{facesContext.externalContext.requestContextPath}/public/propertydetails.xhtml?faces-redirect=true&amp;id=#{cc.attrs.property.id}" class="btn btn-lg btn-primary">
+				Részletek
+			</h:outputLink>
+		</div>
+	</div>
+</composite:implementation>
+</html>
