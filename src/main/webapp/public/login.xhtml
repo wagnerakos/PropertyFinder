@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"      
-      xmlns:h="http://java.sun.com/jsf/html">
-	
-    <h:head>
-        <title>Bejelentkezés</title>
-	<h:outputStylesheet library="css" name="style.css" />
-    </h:head>
-    <h:body>
-    	<h:form styleClass="form-style-1">
-    	   Felhasználónév: <h:inputText value="#{loginController.username}"></h:inputText><br/>
-    	   Jelszó: <h:inputText value="#{loginController.password}"></h:inputText><br/>
-    	   <h:commandLink action="#{loginController.login()}" value="Bejelentkezés" /><br/>
-    	   <h:link value="Regisztráció" outcome="register" />
-    	</h:form>
-    </h:body>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/public/template.xhtml">
+	<ui:define name="content">
+		<h1 class="page-header">Bejelentkezés</h1>
+
+			<div class="col-lg-6">
+				<div class="form-group">
+					<h:inputText class="form-control"
+						value="#{loginController.username}" a:placeholder="Felhasználónév"></h:inputText>
+					<br />
+					<h:inputText class="form-control"
+						value="#{loginController.password}" a:placeholder="Jelszó"></h:inputText>
+					<br />
+					<h:commandButton value="Bejelentkezés"
+						class="btn btn-lg btn-primary" id="loginBtn" action="#{loginController.login()}"/>
+					<br />
+					<br />
+					<h:commandButton value="Regisztráció"
+						class="btn btn-lg btn-primary" id="registerBtn" action="#{loginController.register()}"/>
+					<br />
+				</div>
+			</div>
+	        
+	</ui:define>
+</ui:composition>
 </html>

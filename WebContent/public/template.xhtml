@@ -19,7 +19,7 @@
 	    <div id="wrapper">
 	        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	            <div class="navbar-header">
-	                <a class="navbar-brand" href="index.html" style="font-size: x-large">Ingatlan kereső</a>
+	                <a class="navbar-brand"  style="font-size: x-large">Ingatlan kereső</a>
 	            </div>
 	            <ul class="nav navbar-right top-nav">
 	            	<h:panelGroup rendered="#{empty request.remoteUser}">
@@ -31,6 +31,9 @@
 		                </li>
 	                </h:panelGroup>
 	                <h:panelGroup rendered="#{not empty request.remoteUser}">
+	                 	<li class="dropdown">
+		                    <h:commandLink action="#{userController.profile()}" value="Beállításaim" class="dropdown-toggle"/>
+		                </li>
 		                <li class="dropdown">
 		                    <h:commandLink action="#{loginController.logout()}" value="Kijelentkezés" class="dropdown-toggle"/>
 		                </li>
@@ -45,6 +48,12 @@
 	                    <h:panelGroup rendered="#{not empty request.remoteUser}">
 		                    <li id="tab2">
 		                        <a href="#{facesContext.externalContext.requestContextPath}/user/upload.xhtml"><i class="fa fa-fw fa-upload"></i> Ingatlan feltöltése</a>
+		                    </li>
+	                    </h:panelGroup>
+	                    
+	                    <h:panelGroup rendered="#{userHelper.isUserInRole('ADMIN')}">
+		                    <li id="tab3">
+		                        <a href="#{facesContext.externalContext.requestContextPath}/admin/users.xhtml"><i class="fa fa-fw fa-wrench"></i> Felhasználók kezelése</a>
 		                    </li>
 	                    </h:panelGroup>
 	                </ul>

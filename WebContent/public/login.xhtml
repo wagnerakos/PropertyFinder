@@ -1,18 +1,66 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"      
-      xmlns:h="http://java.sun.com/jsf/html">
-	
-    <h:head>
-        <title>Bejelentkezés</title>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Bejelentkezés</title>
 	<h:outputStylesheet library="css" name="style.css" />
-    </h:head>
-    <h:body>
-    	<h:form styleClass="form-style-1">
-    	   Felhasználónév: <h:inputText value="#{loginController.username}"></h:inputText><br/>
-    	   Jelszó: <h:inputText value="#{loginController.password}"></h:inputText><br/>
-    	   <h:commandLink action="#{loginController.login()}" value="Bejelentkezés" /><br/>
-    	   <h:link value="Regisztráció" outcome="register" />
-    	</h:form>
-    </h:body>
+	<link
+		href="#{facesContext.externalContext.requestContextPath}/public/resources/bootstrap/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link
+		href="#{facesContext.externalContext.requestContextPath}/public/resources/bootstrap/css/sb-admin.css"
+		rel="stylesheet" />
+	<link
+		href="#{facesContext.externalContext.requestContextPath}/public/resources/bootstrap/font-awesome/css/font-awesome.min.css"
+		rel="stylesheet" />
+</h:head>
+<h:body>
+	<div id="wrapper">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" style="font-size: x-large">
+					Bejelentkezés </a>
+			</div>
+
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav side-nav">
+					<li id="tab1"><a
+						href="#{facesContext.externalContext.requestContextPath}/public/properties.xhtml"><i
+							class="fa fa-fw fa-home"></i> Beállításaim</a></li>
+
+					<h:panelGroup rendered="#{not empty request.remoteUser}">
+						<li id="tab2"><a href="#{userController.logout()}"><i
+								class="fa fa-fw fa-upload"></i> Kilépés</a></li>
+					</h:panelGroup>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+		<h:form styleClass="form-style-1">
+    	   Felhasználónév: <h:inputText value="#{loginController.username}"></h:inputText>
+			<br />
+    	   Jelszó: <h:inputText value="#{loginController.password}"></h:inputText>
+			<br />
+			<h:commandLink action="#{loginController.login()}"
+				value="Bejelentkezés" />
+			<br />
+			<h:link value="Regisztráció" outcome="register" />
+		</h:form>
+	</div>
+	<!-- jQuery -->
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/public/resources/bootstrap/js/jquery.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/public/resources/bootstrap/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+    	$(function() {
+        	var tabNumber = $("#tabNumber").val();
+        	$("#tab" + tabNumber).addClass("active");
+        });
+	</script>
+</h:body>
 </html>
