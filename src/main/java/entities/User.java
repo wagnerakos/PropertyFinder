@@ -28,6 +28,9 @@ public class User {
 	@Column(name = "passwordhash")
 	private String passwordHash;
 	
+	@Column(name = "email")
+	private String email;
+	
 	@Column(name = "pfrole")
 	@Enumerated(EnumType.STRING)
 	private Role role;
@@ -74,5 +77,13 @@ public class User {
 
 	public void setProperties(List<Property> properties) {
 		this.properties = properties;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

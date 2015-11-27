@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -35,17 +34,23 @@ public class Property {
 	private Double squareFootage;
 	
 	@OneToOne
-    @PrimaryKeyJoinColumn
+	@JoinColumn(name = "addressid")
 	private Address address;
 	
 	@Column(name = "yearofbuild")
 	private Integer yearOfBuild;
 	
 	@Column(name = "price")
-	private Double price;
+	private Long price;
 	
 	@Column(name = "uploadtime")
 	private Date uploadTime;	
+	
+	@Column(name = "active")
+	private Boolean active;
+	
+	@Column(name = "numberofviews")
+	private Integer numberOfViews;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userid", nullable = false)
@@ -94,11 +99,11 @@ public class Property {
 		this.yearOfBuild = yearOfBuild;
 	}
 
-	public Double getPrice() {
+	public Long getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(Long price) {
 		this.price = price;
 	}
 
@@ -124,5 +129,21 @@ public class Property {
 
 	public void setImages(List<PropertyImage> images) {
 		this.images = images;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public Integer getNumberOfViews() {
+		return numberOfViews;
+	}
+
+	public void setNumberOfViews(Integer numberOfViews) {
+		this.numberOfViews = numberOfViews;
 	}
 }

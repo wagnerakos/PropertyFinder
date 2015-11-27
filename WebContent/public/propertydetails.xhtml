@@ -1,0 +1,95 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:comp="http://java.sun.com/jsf/composite/composite"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:composites="http://java.sun.com/jsf/composite/composites">
+
+<ui:composition template="/public/template.xhtml">
+	<ui:define name="content">
+		<h:inputHidden id="tabNumber" value="1" />
+		
+		<h1 class="page-header">
+            Ingatlan adatai
+        </h1>
+        
+        <div class="row">
+	        <div class="col-lg-3">
+	        	<h:outputLabel value="Cím: " />
+	       	</div>
+	       	<div class="col-lg-6">
+	        	<h:outputText value="#{propertiesController.getAddressAsString(propertyDetailsController.property.address)}" />
+	        </div>
+        </div>
+        
+        <div class="row">
+	        <div class="col-lg-3">
+	        	<h:outputLabel value="Típus: " />
+	       	</div>
+	       	<div class="col-lg-6">
+	        	<h:outputText value="#{propertyDetailsController.property.type.label}" />
+	        </div>
+        </div>
+        
+        <div class="row">
+	        <div class="col-lg-3">
+	        	<h:outputLabel value="Méret: " />
+	       	</div>
+	       	<div class="col-lg-6">
+	        	<h:outputText value="#{propertyDetailsController.property.squareFootage} mm2" />
+	        </div>
+        </div>
+        
+        <div class="row">
+	        <div class="col-lg-3">
+	        	<h:outputLabel value="Építés éve: " />
+	       	</div>
+	       	<div class="col-lg-6">
+	        	<h:outputText value="#{propertyDetailsController.property.yearOfBuild}" />
+	        </div>
+        </div>
+        
+        <div class="row">
+	        <div class="col-lg-3">
+	        	<h:outputLabel value="Ár: " />
+	       	</div>
+	       	<div class="col-lg-6">
+	        	<h:outputText value="#{propertyDetailsController.property.price} Ft" />
+	        </div>
+        </div>
+        
+        <br/>
+        
+        <div class="row">
+	        <div class="col-lg-3">
+	        	<h:outputLabel value="Feltöltő: " />
+	       	</div>
+	       	<div class="col-lg-6">
+	        	<h:outputText value="#{propertyDetailsController.property.user.username}" />
+	        </div>
+        </div>
+        
+        <div class="row">
+	        <div class="col-lg-3">
+	        	<h:outputLabel value="Feltöltő email címe: " />
+	       	</div>
+	       	<div class="col-lg-6">
+	        	<h:outputText value="#{propertyDetailsController.property.user.email}" />
+	        </div>
+        </div>
+        
+        <div class="row">
+	        <div class="col-lg-3">
+	        	<h:outputLabel value="Feltöltés ideje: " />
+	       	</div>
+	       	<div class="col-lg-6">
+	        	<h:outputText value="#{propertyDetailsController.property.uploadTime}" />
+	        </div>
+        </div>
+        
+        
+	</ui:define>
+</ui:composition>
+</html>

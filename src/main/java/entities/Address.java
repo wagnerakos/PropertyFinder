@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -30,7 +29,6 @@ public class Address {
 	private String addressNumber;
 	
 	@OneToOne(mappedBy="address")
-    @PrimaryKeyJoinColumn
     private Property property;
 	
 

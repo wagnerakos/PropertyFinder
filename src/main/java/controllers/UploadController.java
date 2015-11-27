@@ -96,7 +96,7 @@ public class UploadController {
 	public void init() {
 		propertyTypes = new HashMap<>();
 		for (PropertyType type : PropertyType.values()) {
-			propertyTypes.put(type.label, type.name());
+			propertyTypes.put(type.getLabel(), type.name());
 		}
 	}
 	
@@ -113,7 +113,7 @@ public class UploadController {
 		property.setSquareFootage(Double.valueOf(size));
 		property.setAddress(address);
 		property.setYearOfBuild(Integer.valueOf(yearOfBuild));
-		property.setPrice(Double.valueOf(price));
+		property.setPrice(Long.valueOf(price));
 		property.setUser(userHelper.getLoggedInUser());
 		property.setUploadTime(new Date());
 		

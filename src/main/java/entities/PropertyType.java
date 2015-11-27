@@ -1,5 +1,8 @@
 package entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public enum PropertyType {
 	BRICK("Tégla építésû"),
 	PANEL("Panel"),
@@ -7,7 +10,9 @@ public enum PropertyType {
 	SEMIDETACHED_HOUSE("Ikerház"),
 	APARTMENT_HOUSE("Társasház");
 	
-	public String label;
+	@Getter
+	@Setter
+	private String label;
 	
 	private PropertyType(String label) {
 		this.label = label;
