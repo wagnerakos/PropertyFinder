@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 
 import org.omnifaces.util.Faces;
 
-import entities.User;
 import lombok.Getter;
 import lombok.Setter;
 import service.OperatorBean;
@@ -30,13 +29,14 @@ public class LoginController {
 	public String login() {
 		try {
 			Faces.login(username, password);
+
 		} catch (ServletException e) {
 			e.printStackTrace();
 		}
 
 		return "/public/properties.xhtml?faces-redirect=true";
 	}
-	
+
 	public String register() {
 		return "/public/register.xhtml?faces-redirect=true";
 	}
