@@ -10,10 +10,15 @@
 <ui:composition template="/public/template.xhtml">
 	<ui:define name="content">
 		<h:inputHidden id="tabNumber" value="1" />
-		
+            
+        <br/>
+        <div class="col-lg-12 text-right">
+        	<a href="#{facesContext.externalContext.requestContextPath}/public/properties.xhtml" class="btn btn-lg btn-primary">Vissza</a>
+        </div>
+	        
 		<h1 class="page-header">
-            Ingatlan adatai
-        </h1>
+            Ingatlan adatai            
+        </h1>        
         
         <div class="row">
 	        <div class="col-lg-3">
@@ -88,6 +93,16 @@
 	        	<h:outputText value="#{propertyDetailsController.property.uploadTime}" />
 	        </div>
         </div>
+        
+        <br/>
+        <h1 class="page-header">
+            Képek
+        </h1>
+       	<c:forEach items="#{propertyDetailsController.property.images}" var="image">
+        	<div class="col-lg-6">
+	        	<h:graphicImage value="http://localhost:8080/PropertyFinder/images?imageid=#{image.id}" style="max-height: 500px"/>
+	        </div>
+        </c:forEach>
         
         
 	</ui:define>

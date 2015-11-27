@@ -24,7 +24,11 @@ public class ImageServlet extends HttpServlet {
 		try {
 			ic = new InitialContext();
 			PropertyImageFacade propertyImageFacade = (PropertyImageFacade) ic.lookup("java:global/PropertyFinder/PropertyImageFacade");
-			imgData = propertyImageFacade.getFirstByPropertyId(Long.valueOf((String)req.getParameter("id")));
+			if (req.getParameter("propertyid") != null) {
+				imgData = propertyImageFacade.getFirstByPropertyId(Long.valueOf((String)req.getParameter("propertyid")));
+			} else if (req.getParameter("imageid") != null) {
+				imgData = propertyImageFacade.find(Long.valueOf((String)req.getParameter("imageid"))).getData();
+			}
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}	

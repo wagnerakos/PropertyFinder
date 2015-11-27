@@ -30,8 +30,10 @@ public class PropertyFacade extends AbstractFacade<Property> {
 		return em;
 	}
     
-    public List<Property> findAllWithAddress() {
+    public List<Property> findAllWithAddress(Integer first, Integer pageSize) {
     	TypedQuery<Property> query = em().createQuery("SELECT p FROM Property p LEFT JOIN FETCH p.address", Property.class);
+    	query.setFirstResult(first);
+    	query.setMaxResults(pageSize);
     	return query.getResultList();
     }
     
