@@ -18,14 +18,20 @@
 			</div>
 			<div class="form-group">
 				<label>Jelszó</label>
-				<h:inputText class="form-control"
-					value="#{registerController.password}" a:placeholder="Jelszó"></h:inputText>
+				<h:inputSecret class="form-control"
+					value="#{registerController.password}" a:placeholder="Jelszó"></h:inputSecret>
+			</div>
+			<div class="form-group">
+				<label>Jelszó újra</label>
+				<h:inputSecret class="form-control"
+					value="#{registerController.confirmPassword}" a:placeholder="Jelszó"></h:inputSecret>
 			</div>
 			<div class="form-group">
 				<label>E-mail cím</label>
 				<h:inputText class="form-control"
 					value="#{registerController.email}" a:placeholder="E-mail cím"></h:inputText>
 			</div>
+			<h:messages globalOnly="true" class="alert alert-danger"/>
 			<h:commandButton value="Regisztráció" class="btn btn-lg btn-primary"
 				id="registerBtn" action="#{registerController.register()}" />
 		</div>

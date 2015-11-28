@@ -15,13 +15,27 @@
 				<h:inputText value="#{userController.user.username}" class="form-control"></h:inputText>
 			</div>
 			<div class="form-group">
-				<label>Jelszó</label>
-				<h:inputText value="#{userController.password}" class="form-control"></h:inputText>
+				<label>Régi jelszó</label>
+				<h:inputSecret value="#{userController.oldPassword}" class="form-control"></h:inputSecret>
+			</div>
+			<div class="form-group">
+				<label>Új jelszó</label>
+				<h:inputSecret value="#{userController.newPassword}" class="form-control"></h:inputSecret>
+			</div>
+			<div class="form-group">
+				<label>Jelszó újra</label>
+				<h:inputSecret value="#{userController.confirmPassword}" class="form-control"></h:inputSecret>
 			</div>
 			<div class="form-group">
 				<label>E-mail cím</label>
 				<h:inputText value="#{userController.user.email}" class="form-control"></h:inputText>
 			</div>
+			<h:panelGroup rendered="#{userController.success eq false}">
+				<h:messages globalOnly="true" class="alert alert-danger"/>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{userController.success eq true}">
+				<h:messages globalOnly="true" class="alert alert-success"/>
+			</h:panelGroup>			
 			<h:commandButton value="Mentés" class="btn btn-lg btn-primary"
 				id="saveBtn" action="#{userController.save()}" />
 			<br /> <br />

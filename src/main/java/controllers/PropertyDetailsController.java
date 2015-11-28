@@ -1,10 +1,8 @@
 package controllers;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import dal.PropertyFacade;
 import entities.Property;
@@ -12,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class PropertyDetailsController {
 	
 	@EJB
@@ -20,15 +18,26 @@ public class PropertyDetailsController {
 	
 	@Getter
 	@Setter
-	@ManagedProperty(value = "#{param.id}")
 	private String propertyId;
 	
-	@Getter
 	@Setter
-	private Property property;
+	private Property property = null;
 	
-	@PostConstruct
-	public void init() {
-		property = propertyFacade.getWithDataById(Long.valueOf(propertyId));
+	public void inactivate() {
+		property.setActive(false);
+		propertyFacade.edit(property);
+	}
+	
+	public Property getProperty() {
+		if (property == null) {
+			property = propertyFacade.getWithDataById(Long.valueOf(propertyId));
+		}
+		return property;
+	}
+	
+	public void onLoad() {
+		getProperty();
+		property.setNumberOfViews(property.getNumberOfViews() + 1);
+		propertyFacade.edit(property);
 	}
 }

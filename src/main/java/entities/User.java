@@ -25,8 +25,8 @@ public class User {
 	@Column(name = "username")
 	private String username;
 	
-	@Column(name = "passwordhash")
-	private String passwordHash;
+	@Column(name = "password")
+	private String password;
 	
 	@Column(name = "email")
 	private String email;
@@ -35,7 +35,7 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval=true)
 	private List<Property> properties = new ArrayList<>();
 	
 
@@ -55,12 +55,12 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPasswordHash() {
-		return passwordHash;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Role getRole() {

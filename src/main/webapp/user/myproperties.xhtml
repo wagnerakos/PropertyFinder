@@ -11,13 +11,13 @@
 <ui:composition template="/public/template.xhtml">
 	<ui:define name="content">
 		<f:metadata>
-		    <f:event type="preRenderView" listener="#{propertiesController.onLoad(false)}"/>
+		    <f:event type="preRenderView" listener="#{propertiesController.onLoad(true)}"/>
 		</f:metadata>
 		
-		<h:inputHidden id="tabNumber" value="1" />
+		<h:inputHidden id="tabNumber" value="3" />	
 		
 		<h1 class="page-header">
-            Ingatlanok
+            Feltöltéseim
         </h1>
         
         <h:panelGroup id="filters">
@@ -107,9 +107,9 @@
         	</div>
         </h:panelGroup>
         
-        <c:forEach items="#{propertiesController.properties}" var="property">
+        <c:forEach items="#{propertiesController.usersProperties}" var="property">
         	<div class="well">
-        		<composites:propertyComposite property="#{property}"/>
+        		<composites:propertyComposite property="#{property}" showactivelabel="true"/>
         	</div>
         </c:forEach>
         

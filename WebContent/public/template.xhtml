@@ -19,9 +19,9 @@
 	    <div id="wrapper">
 	        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	            <div class="navbar-header">
-	                <a class="navbar-brand"  style="font-size: x-large">Ingatlan kereső</a>
+	                <a class="navbar-brand"  style="font-size: 40px;color: #dddddd"><i class="fa fa-fw fa-search"></i> Ingatlan kereső</a>
 	            </div>
-	            <ul class="nav navbar-right top-nav">
+	            <ul class="nav navbar-right top-nav" style="height: 80px">
 	            	<h:panelGroup rendered="#{empty request.remoteUser}">
 		                <li class="dropdown">
 		                    <a href="#{facesContext.externalContext.requestContextPath}/public/login.xhtml" class="dropdown-toggle">Bejelentkezés</a>
@@ -40,7 +40,7 @@
 	                </h:panelGroup>
 	            </ul>
 	            <div class="collapse navbar-collapse navbar-ex1-collapse">
-	                <ul class="nav navbar-nav side-nav">
+	                <ul class="nav navbar-nav side-nav" style="margin-top: 30px">
 	                    <li id="tab1">
 	                        <a href="#{facesContext.externalContext.requestContextPath}/public/properties.xhtml"><i class="fa fa-fw fa-home"></i> Ingatlanok</a>
 	                    </li>
@@ -51,8 +51,14 @@
 		                    </li>
 	                    </h:panelGroup>
 	                    
-	                    <h:panelGroup rendered="#{userHelper.isUserInRole('ADMIN')}">
+	                    <h:panelGroup rendered="#{not empty request.remoteUser}">
 		                    <li id="tab3">
+		                        <a href="#{facesContext.externalContext.requestContextPath}/user/myproperties.xhtml"><i class="fa fa-fw fa-list"></i> Feltöltéseim</a>
+		                    </li>
+	                    </h:panelGroup>
+	                    
+	                    <h:panelGroup rendered="#{userHelper.isUserInRole('ADMIN')}">
+		                    <li id="tab4">
 		                        <a href="#{facesContext.externalContext.requestContextPath}/admin/users.xhtml"><i class="fa fa-fw fa-wrench"></i> Felhasználók kezelése</a>
 		                    </li>
 	                    </h:panelGroup>

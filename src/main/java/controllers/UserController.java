@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -28,7 +29,19 @@ public class UserController {
 	
 	@Getter
 	@Setter
-	private String password;
+	private String oldPassword;
+	
+	@Getter
+	@Setter
+	private String newPassword;
+	
+	@Getter
+	@Setter
+	private String confirmPassword;
+	
+	@Getter
+	@Setter
+	private boolean success;
 
 	@PostConstruct
 	public void init() {
@@ -42,7 +55,20 @@ public class UserController {
 	}
 
 	public void save() {
-		ob.updateUser(user, password);
+		success = false;
+		if (!oldPassword.equals(user.getPassword())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Helytelen régi jelszó!"));
+			return;			
+		} 
+		if (!newPassword.equals(confirmPassword)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Az új jelszó és annak megerõsítése nem egyezik!"));
+			return;
+		}
+		
+		ob.updateUser(user, newPassword);
+		
+		success = true;
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Mentés sikeres!"));
 	}
 	
 	public String logout() {

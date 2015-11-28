@@ -1,8 +1,10 @@
 package controllers;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 
 import org.omnifaces.util.Faces;
@@ -32,6 +34,8 @@ public class LoginController {
 
 		} catch (ServletException e) {
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Azonosítás sikertelen!"));
+			return null;
 		}
 
 		return "/public/properties.xhtml?faces-redirect=true";

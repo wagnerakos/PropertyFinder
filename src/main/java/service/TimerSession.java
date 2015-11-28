@@ -11,6 +11,7 @@ import javax.ejb.Timeout;
 import javax.ejb.Timer;
 import javax.ejb.TimerService;
 
+import dal.PropertyFacade;
 import entities.User;
 
 @Singleton
@@ -26,6 +27,9 @@ public class TimerSession {
 	
 	@EJB
 	OperatorBean ob;
+	
+	@EJB
+	private PropertyFacade propertyFacade;
 	
 	private String body;
 
@@ -51,6 +55,7 @@ public class TimerSession {
 			u.getProperties().forEach(p -> {
 				body += p.getAddress() + ": " + p.getNumberOfViews() + " megtekintés \n";
 				p.setNumberOfViews(0);
+				propertyFacade.edit(p);
 			});
 			body += "/n Üdvözlettel, /n Ingatlan Keresõ";
 			eb.sendEmail(u.getEmail(), "Ingatlan Keresõ", body);

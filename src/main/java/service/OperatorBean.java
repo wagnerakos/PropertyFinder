@@ -25,7 +25,7 @@ public class OperatorBean {
 
 		User loggedInUser = getUser(username);
 
-		if (loggedInUser == null || !loggedInUser.getPasswordHash().equals(password))
+		if (loggedInUser == null || !loggedInUser.getPassword().equals(password))
 			throw new RuntimeException("Bad username or password");
 
 		return loggedInUser;
@@ -57,7 +57,7 @@ public class OperatorBean {
 		find.setUsername(user.getUsername());
 		find.setEmail(user.getEmail());
 		if (!newPassword.equals("")) {
-			find.setPasswordHash(newPassword);
+			find.setPassword(newPassword);
 		}
 	}
 }

@@ -16,7 +16,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.Column;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
@@ -88,6 +87,10 @@ public class UploadController {
 	
 	@Getter
 	@Setter
+	private String description;
+	
+	@Getter
+	@Setter
 	private Part imageFile;
 	
 	private List<ImageHolder> uploadedFiles = new ArrayList<>();
@@ -100,7 +103,7 @@ public class UploadController {
 		}
 	}
 	
-	public void upload() {		
+	public void upload() {
 		Address address = new Address();
 		address.setZipCode(addressZipCode);
 		address.setCity(addressCity);
@@ -116,6 +119,7 @@ public class UploadController {
 		property.setPrice(Long.valueOf(price));
 		property.setUser(userHelper.getLoggedInUser());
 		property.setUploadTime(new Date());
+		property.setDescription(description);
 		
 		propertyFacade.create(property);
 		

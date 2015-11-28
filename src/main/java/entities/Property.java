@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -33,7 +34,7 @@ public class Property {
 	@Column(name = "squarefootage")
 	private Double squareFootage;
 	
-	@OneToOne
+	@OneToOne(orphanRemoval=true)
 	@JoinColumn(name = "addressid")
 	private Address address;
 	
@@ -52,11 +53,15 @@ public class Property {
 	@Column(name = "numberofviews")
 	private Integer numberOfViews;
 	
+	@Lob
+	@Column(name = "description")
+	private String description;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userid", nullable = false)
 	private User user;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "property")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "property", orphanRemoval=true)
 	private List<PropertyImage> images = new ArrayList<>();	
 
 	public Long getId() {
@@ -145,5 +150,13 @@ public class Property {
 
 	public void setNumberOfViews(Integer numberOfViews) {
 		this.numberOfViews = numberOfViews;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

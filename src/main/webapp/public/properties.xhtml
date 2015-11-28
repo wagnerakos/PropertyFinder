@@ -5,15 +5,107 @@
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:comp="http://java.sun.com/jsf/composite/composite"
 	  xmlns:c="http://java.sun.com/jsp/jstl/core"
-	  xmlns:composites="http://java.sun.com/jsf/composite/composites">
+	  xmlns:composites="http://java.sun.com/jsf/composite/composites"
+	  xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <ui:composition template="/public/template.xhtml">
 	<ui:define name="content">
+		<f:metadata>
+		    <f:event type="preRenderView" listener="#{propertiesController.onLoad(false)}"/>
+		</f:metadata>
+		
 		<h:inputHidden id="tabNumber" value="1" />
 		
 		<h1 class="page-header">
             Ingatlanok
         </h1>
+        
+        <h:panelGroup id="filters">
+        	<div class="row" style="margin-bottom:5px">
+        		<div class="col-lg-2">
+        			<label>Típus</label>
+        		</div>
+        		<div class="col-lg-3">
+        			<h:selectOneMenu class="form-control" value="#{propertiesController.selectedType.value}">
+        				<f:selectItem itemLabel="Összes" itemValue=""/>
+					   	<f:selectItems value="#{uploadController.propertyTypes}"/>
+					</h:selectOneMenu>
+        		</div>
+        	</div>
+        	
+        	<div class="row" style="margin-bottom:5px">
+        		<div class="col-lg-2">
+        			<label>Méret (mm2)</label>
+        		</div>
+        		<div class="col-lg-3">
+        			<h:inputText class="form-control" value="#{propertiesController.sizeFrom.value}" a:placeholder="Tól"/>
+        		</div>
+        		<div class="col-lg-1 text-center">
+        			<h:outputText value="-"/>
+        		</div>
+        		<div class="col-lg-3">
+        			<h:inputText class="form-control" value="#{propertiesController.sizeTo.value}" a:placeholder="Ig"/>
+        		</div>
+        	</div>
+        	
+        	<div class="row" style="margin-bottom:5px">
+        		<div class="col-lg-2">
+        			<label>Cím</label>
+        		</div>
+        		<div class="col-lg-2">
+        			<h:inputText class="form-control" value="#{propertiesController.addressZipCode.value}" a:placeholder="Irányítószám"/>
+        		</div>
+        		<div class="col-lg-2">
+        			<h:inputText class="form-control" value="#{propertiesController.addressCity.value}" a:placeholder="Város"/>
+        		</div>
+        		<div class="col-lg-2">
+        			<h:inputText class="form-control" value="#{propertiesController.addressStreet.value}" a:placeholder="Utca"/>
+        		</div>
+        		<div class="col-lg-2">
+        			<h:inputText class="form-control" value="#{propertiesController.addressAddressNumber.value}" a:placeholder="Házszám"/>
+        		</div>
+        		<div class="col-lg-2">
+        		</div>
+        	</div>
+        	
+        	<div class="row" style="margin-bottom:5px">
+        		<div class="col-lg-2">
+        			<label>Ár (Ft)</label>
+        		</div>
+        		<div class="col-lg-3">
+        			<h:inputText class="form-control" value="#{propertiesController.priceFrom.value}" a:placeholder="Tól"/>
+        		</div>
+        		<div class="col-lg-1 text-center">
+        			<h:outputText value="-"/>
+        		</div>
+        		<div class="col-lg-3">
+        			<h:inputText class="form-control" value="#{propertiesController.priceTo.value}" a:placeholder="Ig"/>
+        		</div>
+        	</div>
+        	
+        	<div class="row page-header" style="margin-bottom:20px;margin-top:25px">
+	        	<div class="col-lg-6">
+	        		<h:commandButton value="Szűrés" class="btn btn-lg btn-primary">
+	        			<f:ajax listener="#{propertiesController.applyFilters()}" execute="form" render="form"/>
+	        		</h:commandButton>
+	        	</div>
+	        	<div class="col-lg-2 text-right">
+	        		<label>Rendezés:</label>	        		
+	        	</div>
+	        	<div class="col-lg-2">
+        			<h:selectOneMenu class="form-control" value="#{propertiesController.sortField}">
+					   	<f:selectItems value="#{propertiesController.sortFields}"/>
+					   	<f:ajax event="change" render="form"/>
+					</h:selectOneMenu>
+        		</div>
+        		<div class="col-lg-2">
+        			<h:selectOneMenu class="form-control" value="#{propertiesController.sortDirection}">
+					   	<f:selectItems value="#{propertiesController.sortDirections}"/>
+					   	<f:ajax event="change" render="form"/>
+					</h:selectOneMenu>
+        		</div>
+        	</div>
+        </h:panelGroup>
         
         <c:forEach items="#{propertiesController.properties}" var="property">
         	<div class="well">
@@ -28,7 +120,7 @@
 	        	</h:commandButton>
 	       	</div>
 	       	<div class="col-lg-4 text-center">
-	        	<h:outputText value="#{propertiesController.first + 1}-#{propertiesController.upperBoundary}/#{propertiesController.totalCount}" />
+	        	<h:outputText value="#{propertiesController.lowerBoundary}-#{propertiesController.upperBoundary}/#{propertiesController.totalCount}" />
 	       	</div>
 	       	<div class="col-lg-4 text-right">
 	        	<h:commandButton value="Következő &gt;" rendered="#{propertiesController.first + propertiesController.pageSize lt propertiesController.totalCount}" class="btn btn-lg btn-default">

@@ -7,16 +7,17 @@
 
 <ui:composition template="/public/template.xhtml">
 	<ui:define name="content">
-		<h1 class="page-header">Ingatlan Kereső</h1>
+		<h1 class="page-header">Bejelentkezés</h1>
 
 			<div class="col-lg-6">
 				<div class="form-group">
 					<h:inputText class="form-control"
 						value="#{loginController.username}" a:placeholder="Felhasználónév"></h:inputText>
 					<br />
-					<h:inputText class="form-control"
-						value="#{loginController.password}" a:placeholder="Jelszó"></h:inputText>
+					<h:inputSecret class="form-control"
+						value="#{loginController.password}" a:placeholder="Jelszó"></h:inputSecret>
 					<br />
+					<h:messages globalOnly="true" class="alert alert-danger"/>
 					<h:commandButton value="Bejelentkezés"
 						class="btn btn-lg btn-primary" id="loginBtn" action="#{loginController.login()}"/>
 					<br />
