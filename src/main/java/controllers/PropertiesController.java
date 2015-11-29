@@ -36,7 +36,7 @@ public class PropertiesController {
 	
 	@Getter
 	@Setter
-	private Integer pageSize = 5;
+	private Integer pageSize = 10;
 	
 	@Getter
 	@Setter

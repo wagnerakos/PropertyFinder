@@ -95,6 +95,10 @@ public class UploadController {
 	
 	private List<ImageHolder> uploadedFiles = new ArrayList<>();
 	
+	@Getter
+	@Setter
+	private boolean success;
+	
 	@PostConstruct
 	public void init() {
 		propertyTypes = new HashMap<>();
@@ -104,6 +108,12 @@ public class UploadController {
 	}
 	
 	public void upload() {
+		success = true;
+		if (uploadedFiles.isEmpty()) {
+			success = false;
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Legalább egy kép feltöltése kötelezõ!"));
+			return;
+		}
 		Address address = new Address();
 		address.setZipCode(addressZipCode);
 		address.setCity(addressCity);
@@ -120,6 +130,8 @@ public class UploadController {
 		property.setUser(userHelper.getLoggedInUser());
 		property.setUploadTime(new Date());
 		property.setDescription(description);
+		property.setActive(true);
+		property.setNumberOfViews(0);
 		
 		propertyFacade.create(property);
 		

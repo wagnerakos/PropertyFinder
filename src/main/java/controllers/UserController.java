@@ -56,13 +56,19 @@ public class UserController {
 
 	public void save() {
 		success = false;
-		if (!oldPassword.equals(user.getPassword())) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Helytelen régi jelszó!"));
-			return;			
-		} 
-		if (!newPassword.equals(confirmPassword)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Az új jelszó és annak megerõsítése nem egyezik!"));
-			return;
+		if (oldPassword != null && !oldPassword.equals("")) {
+			if (!oldPassword.equals(user.getPassword())) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Helytelen régi jelszó!"));
+				return;			
+			}
+			if (newPassword == null || newPassword.equals("")) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Helytelen új jelszó!"));
+				return;
+			}
+			if (!newPassword.equals(confirmPassword)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Az új jelszó és annak megerõsítése nem egyezik!"));
+				return;
+			}
 		}
 		
 		ob.updateUser(user, newPassword);

@@ -36,4 +36,13 @@ public class UserFacade extends AbstractFacade<User> {
     	
     	return query.getSingleResult();
     }
+    
+    public boolean isUsernameReserved(String username) {
+    	String queryString = "SELECT COUNT(u) FROM User u WHERE u.username = :username";
+    	
+    	TypedQuery<Long> query = em().createQuery(queryString, Long.class);
+    	query.setParameter("username", username);
+    	
+    	return query.getSingleResult() > 0;
+    }
 }

@@ -3,9 +3,10 @@ package controllers;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import dal.UserFacade;
 import entities.Role;
 import entities.User;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import lombok.Setter;
 import service.OperatorBean;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class RegisterController {
 	
 	@Getter
@@ -35,7 +36,15 @@ public class RegisterController {
 	@EJB
 	private OperatorBean ob;
 	
+	@EJB
+	private UserFacade userFacade;
+	
 	public String register() {
+		if (userFacade.isUsernameReserved(username)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A felhasználónév foglalt, kérem válasszon másikat!"));
+			return null;
+		}
+		
 		if (!password.equals(confirmPassword)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("A jelszó és annak megerõsítése nem egyezik!"));
 			return null;
